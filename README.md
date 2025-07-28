@@ -26,6 +26,7 @@ A small program written in C and C++ as an exercise, to track memory allocations
 4. At every memory allocation with a call to `malloc()`, the custom implementation of `malloc()` will save information in an `AllocRecord` instance and insert a pointer to it in the hash table after hashing the pointer address, and then call the libc version of `malloc()` as usual and return the pointer address of allocated memory
 
 When the target application made a call to `malloc()` or used STL which in turn made a call to `malloc()` underneath this is what would occur:
+    
     ```
     1. malloc() call in application
     2. Calls custom malloc() function 

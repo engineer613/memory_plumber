@@ -98,7 +98,7 @@ MEMORY LEAKS DETECTED:
     ```
 
 
-- When the application exits, the library should print out any memory leaks with relevant stack trace at the time of allocation. 
+- _**When the application exits, the library should print out any memory leaks with relevant stack trace at the time of allocation. **_
 
 
 

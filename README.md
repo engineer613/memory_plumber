@@ -27,21 +27,21 @@ A small program written in C and C++ as an exercise, to track memory allocations
 
 When the target application made a call to `malloc()` or used STL which in turn made a call to `malloc()` underneath this is what would occur:
     
-    ```
+    
     1. malloc() call in application
     2. Calls custom malloc() function 
     3. Inside custom malloc() function, call the libc versio of malloc() stored in a function pointer
     4. libc malloc returns a pointer address. Store the pointer address, size of allocation and stacktrace in a hashmap
     5. Return the pointer address like libc malloc() does
-    ```
+    
 
 5. At every call to `free(void* mem_addr)`, the custom implementation of `free(void* mem_addr)` will look for the `AllocationRecord*` corresponding to hashed value of `mem_addr` in the hash map, and remove it. And then call the libc version of free() as usual. Similarly when  free() is called from the target application:
 
    ```
-   1. `free(mem_ptr)` call in application
+   1. free(mem_ptr) call in application
    2. Calls custom free(mem_ptr) function implemented in mem_plumber.cpp
    3. Inside custom free(mem_ptr) implementation, hash the pointer address and look up the key (hashed value) in the allocation table
-   4. If the Allocation Record corresponding to the `mem_ptr` address is found, it is freed and the function call returns just like the libc `free()` function
+   4. If the Allocation Record corresponding to the mem_ptr address is found, it is freed and the function call returns just like the libc free() function
    ```
 
 7. The hashmap in which the allocation records are stored is marked `static` and also wrapped in a pthread_mutex_t, so if the target application is multithreaded, multiple threads write to the same instance of the hashmap without any data races.

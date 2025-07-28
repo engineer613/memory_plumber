@@ -32,7 +32,7 @@ MEMORY LEAKS DETECTED:
 
 
 ### How it works
-1. The symbols for `malloc()` and `free()` are overriden with custom functions of the same name at the linker level,using `LD_PRELOAD` (Dynamic Function Interposition). The custom `malloc()` and `free()` implementations track the memory allocations (address and size), in the target application, whenever calls are made to malloc() or free()
+1. **The symbols for `malloc()` and `free()` are overriden with custom function symbols of the same name at the linker level, using `LD_PRELOAD` (Dynamic Function Interposition). The custom `malloc()` and `free()` implementations track the memory allocations (address and size), in the target application, whenever calls are made to malloc() or free()**
    
 2. The original libc versions of `malloc()` and `free()` are obtained at init using `dlsym()`, stored in function pointers and called inside the custom malloc() implementation after saving information about the size and address of the memory allocation performed by the target application.
 

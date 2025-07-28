@@ -1,6 +1,12 @@
 # Memory Plumber
 A small program written in C and C++ as an exercise, to track memory allocations made by another application and detect and identify any memory leaks.
 
+### TODO
+1. Code cleanup- split mem_plumber into header (.hpp) and implementation (.cpp ) files
+2. Create a CMake file for easier compilation
+3. Get rid of redundant "." characters in the stack trace for detected memory leaks (paths are not broken though, can be used as-is)   
+
+
 
 ### How it works
 1. The symbols for `malloc()` and `free()` are overriden with custom functions of the same name at the linker level,using `LD_PRELOAD` (Dynamic Function Interposition). The custom `malloc()` and `free()` implementations track the memory allocations (address and size), in the target application, whenever calls are made to malloc() or free()
@@ -94,3 +100,5 @@ MEMORY LEAKS DETECTED:
     ./csu/../csu/libc-start.c:128
 
 ```
+
+

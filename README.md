@@ -27,7 +27,7 @@ A small program written in C and C++ as an exercise, to track memory allocations
 
 When the target application made a call to `malloc()` or used STL which in turn made a call to `malloc()` underneath this is what would occur:
     ```
-    1. malloc() call in application 
+    1. malloc() call in application
     2. Calls custom malloc() function 
     3. Inside custom malloc() function, call the libc versio of malloc() stored in a function pointer
     4. libc malloc returns a pointer address. Store the pointer address, size of allocation and stacktrace in a hashmap

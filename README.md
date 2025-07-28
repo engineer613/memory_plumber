@@ -1,10 +1,33 @@
 # Memory Plumber
 A small program written in C and C++ as an exercise, to track memory allocations made by another application and detect and identify any memory leaks.
 
-### TODO
+### ToDo
 1. Code cleanup- split mem_plumber into header (.hpp) and implementation (.cpp ) files
 2. Create a CMake file for easier compilation
 3. Get rid of redundant "." characters in the stack trace for detected memory leaks (paths are not broken though, can be used as-is)   
+
+
+### Demo
+
+**_To test out mem_plumber, a very small C++ program that doesn't deallocate heap memory is included in this repo (`leaky_example.cpp`) and can be run along with the memory plumber by running the `compile-and-run.sh` script included with this repo:_**
+
+```
+./compile-and-run.sh
+
+
+MEMORY LEAKS DETECTED:
+
+
+  Leaking 20 bytes at 0x60e431b142b0
+  Allocation Backtrace:
+    ./memory_plumber/./leaky_example.cpp:6
+    ./memory_plumber/./leaky_example.cpp:11
+    ./memory_plumber/./leaky_example.cpp:13
+    ./memory_plumber/./leaky_example.cpp:19
+    ./csu/../csu/libc-start.c:128
+
+```
+
 
 
 
@@ -78,27 +101,5 @@ When the target application made a call to `malloc()` or used STL which in turn 
 
 - When the application exits, the library should print out any memory leaks with relevant stack trace at the time of allocation. 
 
-
-
-### Demo
-
-**_Alternatively, a very small C++ program that doesn't deallocate heap memory is included in this repo (`leaky_example.cpp`) and can be run along with the memory plumber by running the `compile-and-run.sh` script included in this repo:_**
-
-```
-./compile-and-run.sh
-
-
-MEMORY LEAKS DETECTED:
-
-
-  Leaking 20 bytes at 0x60e431b142b0
-  Allocation Backtrace:
-    ./memory_plumber/./leaky_example.cpp:6
-    ./memory_plumber/./leaky_example.cpp:11
-    ./memory_plumber/./leaky_example.cpp:13
-    ./memory_plumber/./leaky_example.cpp:19
-    ./csu/../csu/libc-start.c:128
-
-```
 
 

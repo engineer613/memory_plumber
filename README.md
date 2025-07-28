@@ -24,7 +24,9 @@ A small program written in C and C++ as an exercise, to track memory allocations
 
 4. At every call to `free(void* mem_addr)`, the custom implementation of `free(void* mem_addr)` will look for the `AllocationRecord*` corresponding to hashed value of `mem_addr` in the hash map, and remove it. And then call the libc version of free() as usual
 
-5. At the end, when the application in question is exiting, this program will run a function to print out information about the memory allocations that were never deallocated along with the relevant backtrace from the application to pin point the memory leaks.
+5. The hashmap in which the allocation records are stored is marked `static` and also wrapped in a pthread_mutex_t, so if the target application is multithreaded, multiple threads write to the same instance of the hashmap without any data races.
+
+6. At the end, when the application in question is exiting, this program will run a function to print out information about the memory allocations that were never deallocated along with the relevant backtrace from the application to pin point the memory leaks.
 
 
 ### Usage
@@ -34,6 +36,12 @@ A small program written in C and C++ as an exercise, to track memory allocations
     ```
     g++ -g -fPIC -shared -o libmemplumber.so $MEM_PLUMBER_SRC -ldl -rdynamic -lpthread
     ```
+
+- Compile the target C/C++ application also using g++:
+    ```
+    g++ -g -o leaky_application leaky_application.cpp  # -g flag is required for debug symbols to let addr2line resolve the stack trace to file names and line numbers
+    ```
+
 
 - Then run the application in which memory leaks are suspected like this:
 
@@ -45,7 +53,7 @@ A small program written in C and C++ as an exercise, to track memory allocations
 - When the application exits, the library should print out any memory leaks with relevant stack trace at the time of allocation. 
 
 
-Alternatively, a very small C++ program that doesn't deallocate heap memory is included in this repo (`leaky_example.cpp`) and can be run with memory plumber by running the `compile-and-run.sh` script included in this repo:
+**_Alternatively, a very small C++ program that doesn't deallocate heap memory is included in this repo (`leaky_example.cpp`) and can be run with memory plumber by running the `compile-and-run.sh` script included in this repo:_**
 
 ```
 ./compile-and-run.sh

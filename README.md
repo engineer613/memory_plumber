@@ -73,6 +73,9 @@ When the target application made a call to `malloc()` or used STL which in turn 
 - When the application exits, the library should print out any memory leaks with relevant stack trace at the time of allocation. 
 
 
+
+### Demo
+
 **_Alternatively, a very small C++ program that doesn't deallocate heap memory is included in this repo (`leaky_example.cpp`) and can be run along with the memory plumber by running the `compile-and-run.sh` script included in this repo:_**
 
 ```

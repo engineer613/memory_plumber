@@ -1,5 +1,5 @@
 # Memory Plumber
-A small program written in C and C++ as an exercise, to track memory allocations made by another application and detect and identify any memory leaks.
+A small demo library written in C and C++ as an exercise, to track memory allocations made by another application and detect and identify any memory leaks.
 
 ### ToDo
 1. Code cleanup- split mem_plumber into header (.hpp) and implementation (.cpp ) files

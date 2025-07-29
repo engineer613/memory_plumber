@@ -4,7 +4,8 @@ A small demo library written in C and C++ as an exercise, to track memory alloca
 ### ToDo
 1. Code cleanup- split mem_plumber into header (.hpp) and implementation (.cpp ) files
 2. Create a CMake file for easier compilation
-3. Get rid of redundant "." characters in the stack trace for detected memory leaks (paths are not broken though, can be used as-is)   
+3. Override other allocation functions like `calloc()` and `realloc()` if necessary  
+4. Get rid of redundant "." characters in the stack trace for detected memory leaks (paths are not broken though, can be used as-is)   
 
 
 ### Demo
